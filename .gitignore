@@ -1,3 +1,7 @@
+
+# Created by https://www.gitignore.io/api/python
+
+### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -87,3 +91,16 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# Updater data
+substancebridge_updater/
+
+# Overcommit
+.overcommit.yml
+
+# Ignore blend temporary file
+*.blend1
+*.blend2
+
+# PyCharm folder and file
+/.idea/
