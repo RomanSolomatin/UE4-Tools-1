@@ -5,10 +5,14 @@ import mathutils
 
 modulesNames = [
     # Models
+    # 'models.paths',
     # Views
     'views.check',
     'views.collision',
+    'views.exports',
     # Controllers
+    'controllers.check',
+    'controllers.export_stadium',
     ]
 
 modulesFullNames = []

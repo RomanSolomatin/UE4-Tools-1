@@ -16,6 +16,9 @@ class CheckerObjectsPanel(bpy.types.Panel):
         layout = self.layout
 
         layout.label("Check all parameter for selected object")
+        text = "Lightmap"
+        icon = "FILE_TICK"
+        layout.operator("object.check_lightmap", text=text, icon=icon)
 
 
 def register():
