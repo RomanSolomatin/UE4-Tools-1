@@ -1,5 +1,25 @@
 import bpy
+import sys
+import importlib
 import mathutils
+
+modulesNames = [
+    # Models
+    # Views
+    'views.check',
+    'views.collision',
+    # Controllers
+    ]
+
+modulesFullNames = []
+for currentModule in modulesNames:
+    modulesFullNames.append('{}.{}'.format(__name__, currentModule))
+
+for currentModule in modulesFullNames:
+    if currentModule in sys.modules:
+        importlib.reload(sys.modules[currentModule])
+    else:
+        globals()[currentModule] = importlib.import_module(currentModule)
 
 bl_info = {
     "name": "UE4 Tools",
@@ -71,27 +91,24 @@ class GenerateBoundingBoxesOperator(bpy.types.Operator):
         main(context, self.name_prefix)
         return {'FINISHED'}
 
-class UCXPanel(bpy.types.Panel): 
-    bl_label = "GA Tools"
-    bl_space_type = "VIEW_3D"
-    bl_region_type = "TOOLS"
-    bl_category = "GA Tools"
-
-    def draw(self, context):
-        layout = self.layout
-
-        layout.label(text="UCX")
-        layout.operator("object.generate_bounding_boxes")
-
 
 def register():
     bpy.utils.register_class(GenerateBoundingBoxesOperator)
-    bpy.utils.register_class(UCXPanel)
+
+    # Add all class present in this addon
+    for module in modulesFullNames:
+        if module in sys.modules:
+            if hasattr(sys.modules[module], 'register'):
+                sys.modules[module].register()
 
 
 def unregister():
     bpy.utils.unregister_class(GenerateBoundingBoxesOperator)
-    bpy.utils.unregister_class(UCXPanel)
+
+    for module in modulesFullNames:
+        if module in sys.modules:
+            if hasattr(sys.modules[module], 'unregister'):
+                sys.modules[module].unregister()
 
 
 if __name__ == "__main__":
