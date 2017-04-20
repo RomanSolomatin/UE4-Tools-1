@@ -12,7 +12,7 @@ modulesNames = [
     'views.exports',
     # Controllers
     'controllers.check',
-    'controllers.export_stadium',
+    'controllers.export_scene',
     ]
 
 modulesFullNames = []
