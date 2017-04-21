@@ -19,7 +19,7 @@ class ClassPanel(bpy.types.Panel):
         layout.operator("object.export_stadium", text=text, icon=icon)
         text = "Copy Data Buffer"
         icon = "COPYDOWN"
-        layout.operator("object.export_stadium", text=text, icon=icon)
+        layout.operator("object.data_buffer", text=text, icon=icon)
         text = "Assets Elements"
         icon = "MATCUBE"
         layout.operator("object.manage_assets", text=text, icon=icon)
