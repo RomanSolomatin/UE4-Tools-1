@@ -13,10 +13,16 @@ class ClassPanel(bpy.types.Panel):
     def draw(self, context):
         layout = self.layout
 
+        layout.prop(context.scene, 'conf_path')
         text = "Exports all Visible"
         icon = "FILE_TICK"
-        layout.prop(context.scene, 'conf_path')
         layout.operator("object.export_stadium", text=text, icon=icon)
+        text = "Copy Data Buffer"
+        icon = "COPYDOWN"
+        layout.operator("object.export_stadium", text=text, icon=icon)
+        text = "Assets Elements"
+        icon = "MATCUBE"
+        layout.operator("object.manage_assets", text=text, icon=icon)
 
 
 def register():
