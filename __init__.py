@@ -13,6 +13,7 @@ modulesNames = [
     # Controllers
     'controllers.check',
     'controllers.export_scene',
+    'controllers.manage',
     ]
 
 modulesFullNames = []
