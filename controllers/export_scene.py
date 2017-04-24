@@ -29,19 +29,20 @@ class ExportScene(bpy.types.Operator):
                 path = folder + name + file_extension
 
                 # Add a new rule, assets objects (need to be center)
-                if obj.parent.name == 'assets_element':
-                    folder = self.path_export + "\\assets\\"
-                    if not os.path.exists(folder):
-                        os.makedirs(folder)
+                if obj.parent is not None:
+                    if obj.parent.name == 'assets_element':
+                        folder = self.path_export + "\\assets\\"
+                        if not os.path.exists(folder):
+                            os.makedirs(folder)
 
-                    path = os.path.join(folder + name + file_extension)
-                    # folder = dir(self.path_export + "assets")
-                    # path = str(folder) + name + ".fbx"
+                        path = os.path.join(folder + name + file_extension)
+                        # folder = dir(self.path_export + "assets")
+                        # path = str(folder) + name + ".fbx"
 
-                    print("This element as an assets :")
-                    print(obj.name)
-                    print("The path export as :")
-                    print(path)
+                        print("This element as an assets :")
+                        print(obj.name)
+                        print("The path export as :")
+                        print(path)
 
                 bpy.ops.export_scene.fbx(filepath=path,
                                          version='BIN7400',
