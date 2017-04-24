@@ -3,6 +3,9 @@ import sys
 import importlib
 import mathutils
 
+from bpy.props import StringProperty
+
+
 modulesNames = [
     # Models
     # 'models.paths',
@@ -39,16 +42,15 @@ bl_info = {
 
 def main(context, prefix):
     #make a list of the selected objects of type 'mesh'
-    import bpy
 
     objs = [obj for obj in bpy.context.selected_objects if obj.type == 'MESH']
     generated_objs = []
-    
+
     bpy.ops.object.select_all(action='DESELECT')
-    
+
     for obj in objs:
         scale = obj.scale
-        
+
         minx = obj.bound_box[0][0] * scale.x
         maxx = obj.bound_box[4][0] * scale.x
         miny = obj.bound_box[0][1] * scale.y
@@ -58,29 +60,28 @@ def main(context, prefix):
         dx = maxx - minx
         dy = maxy - miny
         dz = maxz - minz
-    
+
         new_name = '{0}{1}'.format(prefix, obj.name)
-        
+
         loc =  mathutils.Vector(((minx + 0.5* dx), (miny + 0.5* dy), (minz + 0.5* dz)))
         loc.rotate(obj.rotation_euler)
         loc = loc + obj.location
-        
+
         bpy.ops.mesh.primitive_cube_add(location=loc, rotation=obj.rotation_euler)
         new_obj = bpy.context.object
-        
+
         new_obj.name = new_name
         new_obj.dimensions = mathutils.Vector((dx, dy, dz))
-        
+
         generated_objs.append(new_obj)
-        
+
         new_obj.data.show_double_sided = False
-    
+
     for obj in generated_objs:
         obj.select=True
         obj.draw_type = 'WIRE'
 
 
-from bpy.props import StringProperty
 
 class GenerateBoundingBoxesOperator(bpy.types.Operator):
     """Create a joined copy of selected meshes, with modifiers applied if needed"""
