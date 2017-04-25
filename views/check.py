@@ -1,4 +1,5 @@
 import bpy
+import mathutils
 
 
 # -----------------------------------------------------------------------------
@@ -20,12 +21,23 @@ class CheckerObjectsPanel(bpy.types.Panel):
             layout.label(obj.name)
 
             # Check any point :
+            # - Reset Xform
             # - Lightmap
             # - Material
-            if context.active_object.type == 'MESH':
+            if obj.type == 'MESH':
+                text = "Transform object"
+                icon = "ERROR"
+                zero_rot = mathutils.Euler((0, 0, 0), 'XYZ')
+                zero_scale = mathutils.Vector((1, 1, 1))
+                if obj.scale == zero_scale and obj.rotation_euler == zero_rot:
+                    text = "X Form"
+                    icon = "FILE_TICK"
+
+                layout.label(text=text, icon=icon)
+
                 text = "No Lightmap UV"
                 icon = "ERROR"
-                uvs = context.active_object.data.uv_layers
+                uvs = obj.data.uv_layers
                 if len(uvs) >= 2:
                     text = "UV Bad name"
                     if uvs[1] and uvs[1].name == 'UV Lightmap':
@@ -36,8 +48,8 @@ class CheckerObjectsPanel(bpy.types.Panel):
 
                 text = "No Material"
                 icon = "ERROR"
-                if len(context.active_object.material_slots) >= 1:
-                    if context.active_object.material_slots[0]:
+                if len(obj.material_slots) >= 1:
+                    if obj.material_slots[0]:
                         text = "Material(s)"
                         icon = "FILE_TICK"
                 layout.label(text=text, icon=icon)
