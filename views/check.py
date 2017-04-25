@@ -14,11 +14,41 @@ class CheckerObjectsPanel(bpy.types.Panel):
 
     def draw(self, context):
         layout = self.layout
+        obj = context.active_object
 
-        layout.label("Check all parameter for selected object")
-        text = "Lightmap"
-        icon = "FILE_TICK"
-        layout.operator("object.check_lightmap", text=text, icon=icon)
+        if context.active_object is not None:
+            layout.label(obj.name)
+
+            # Check any point :
+            # - Lightmap
+            # - Material
+            if context.active_object.type == 'MESH':
+                text = "No Lightmap UV"
+                icon = "ERROR"
+                uvs = context.active_object.data.uv_layers
+                if len(uvs) >= 2:
+                    text = "UV Bad name"
+                    if uvs[1] and uvs[1].name == 'UV Lightmap':
+                        text = "Lightmap"
+                        icon = "FILE_TICK"
+
+                layout.label(text=text, icon=icon)
+
+                text = "No Material"
+                icon = "ERROR"
+                if len(context.active_object.material_slots) >= 1:
+                    if context.active_object.material_slots[0]:
+                        text = "Material(s)"
+                        icon = "FILE_TICK"
+                layout.label(text=text, icon=icon)
+
+            else:
+                layout.label("This object can't be export")
+
+        else:
+            layout.label("No object selected")
+
+
 
 
 def register():
