@@ -24,6 +24,7 @@ class CheckerObjectsPanel(bpy.types.Panel):
             # - Reset Xform
             # - Lightmap
             # - Material
+            # - Smooth Group
             if obj.type == 'MESH':
                 text = "Transform object"
                 icon = "ERROR"
@@ -52,6 +53,13 @@ class CheckerObjectsPanel(bpy.types.Panel):
                     if obj.material_slots[0]:
                         text = "Material(s)"
                         icon = "FILE_TICK"
+                layout.label(text=text, icon=icon)
+
+                text = "No Smoothing Group"
+                icon = "ERROR"
+                if obj.data.polygons[0].use_smooth == True:
+                    text = "Smoothing Groups"
+                    icon = "FILE_TICK"
                 layout.label(text=text, icon=icon)
 
             else:
