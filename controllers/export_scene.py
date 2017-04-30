@@ -1,6 +1,21 @@
 import bpy
 import os
 
+def blendname():
+    '''This function take the filename as a variable, check if the file as 
+    save and return a string.'''
+
+    path = bpy.data.filepath
+    name = ''
+
+    if bpy.data.is_saved == True:
+        name = bpy.path.basename(path)
+        filename, ext = os.path.splitext(name)
+        name = filename.replace(" ", "_")
+
+    return name
+
+
 class ExportScene(bpy.types.Operator):
     """Export all stadium element"""
     bl_idname = "object.export_stadium"
@@ -26,7 +41,11 @@ class ExportScene(bpy.types.Operator):
                 self.path_export = scn.conf_path
                 folder = self.path_export
                 file_extension = ".fbx"
-                path = folder + name + file_extension
+                path = folder + blendname() + "\\" + name + file_extension
+
+                folder = self.path_export + "\\" + blendname()
+                if not os.path.exists(folder):
+                    os.makedirs(folder)
 
                 # Add a new rule, assets objects (need to be center)
                 if obj.parent is not None:
