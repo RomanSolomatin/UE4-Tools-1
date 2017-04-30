@@ -18,7 +18,6 @@ class CheckerObjectsPanel(bpy.types.Panel):
         obj = context.active_object
 
         if context.active_object is not None:
-            layout.label(obj.name)
 
             # Check any point :
             # - Reset Xform
@@ -26,6 +25,8 @@ class CheckerObjectsPanel(bpy.types.Panel):
             # - Material
             # - Smooth Group
             if obj.type == 'MESH':
+                layout.prop(obj, 'name', text="", icon="OBJECT_DATA")
+
                 text = "Transform object"
                 icon = "ERROR"
                 zero_rot = mathutils.Euler((0, 0, 0), 'XYZ')
