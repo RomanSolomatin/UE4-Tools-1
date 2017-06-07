@@ -21,9 +21,10 @@ class DataBuffer(bpy.types.Operator):
                 position_x = str(round(element.location.x * 100, 2))
                 position_y = str(round(element.location.y * -100, 2))
                 position_z = str(round(element.location.z * 100, 2))
-                rotation_pitch = str(round(degrees(element.rotation_euler.x), 2))
-                rotation_yaw = str(round(degrees(element.rotation_euler.y), 2))
-                rotation_roll = str(round(degrees(element.rotation_euler.z), 2))
+                rotation_pitch = str(round(degrees(element.rotation_euler.y), 2))
+                rotation_yaw = str(round(degrees(element.rotation_euler.z),
+                                         2)* -1)
+                rotation_roll = str(round(degrees(element.rotation_euler.x), 2))
                 string_data = string_data + \
     '      Begin Actor '\
             'Class=StaticMeshActor '\
