@@ -13,6 +13,9 @@ class UCXPanel(bpy.types.Panel):
         layout.label(text="UCX")
         layout.operator("object.generate_bounding_boxes")
 
+        layout.label(text="Lightmap")
+        layout.operator("uv.lightmap_generate")
+
 def register():
     bpy.utils.register_class(UCXPanel)
 
