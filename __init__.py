@@ -17,6 +17,7 @@ modulesNames = [
     'controllers.check',
     'controllers.data_buffer',
     'controllers.export_scene',
+    'controllers.group_mir',
     'controllers.lightmap',
     'controllers.manage',
     ]
