@@ -15,7 +15,7 @@ class MirorGroup(bpy.types.Operator):
     def execute(self, context):
         obj = context.object
 
-        grp_name = 'MIR ' + obj.name
+        grp_name = obj.name
         dupli = bpy.data.groups.find(grp_name)
 
         if dupli == -1:
@@ -29,6 +29,7 @@ class MirorGroup(bpy.types.Operator):
 
         # Generate all Duplication
         bpy.ops.object.group_instance_add(group=grp_name,
+                                          location=(0, 0, 0),
                                           rotation=(0, 0, 0))
         obj = bpy.context.object
         bpy.data.objects.get(obj.name).select = True
@@ -36,10 +37,13 @@ class MirorGroup(bpy.types.Operator):
 
 
         bpy.ops.object.group_instance_add(group=grp_name,
+                                          location=(0, 0, 0),
+
                                           rotation=(0, 0, math.radians(180)))
         obj = bpy.context.object
         bpy.data.objects.get(obj.name).select = True
         bpy.ops.object.group_instance_add(group=grp_name,
+                                          location=(0, 0, 0),
                                           rotation=(0, 0, 0))
         obj = bpy.context.object
         bpy.data.objects.get(obj.name).select = True
