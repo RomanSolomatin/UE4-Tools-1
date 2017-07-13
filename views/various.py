@@ -19,7 +19,7 @@ class UCXPanel(bpy.types.Panel):
         layout.operator("object.group_miror", text=text)
         icon = 'CURVE_DATA'
         text = "Curve Data"
-        layout.operator("object.spline_csv", text=text)
+        layout.operator("object.spline_csv", text=text, icon=icon)
 
 def register():
     bpy.utils.register_class(UCXPanel)
