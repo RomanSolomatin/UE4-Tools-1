@@ -11,8 +11,8 @@ modulesNames = [
     # 'models.paths',
     # Views
     'views.check',
-    'views.collision',
     'views.exports',
+    'views.various',
     # Controllers
     'controllers.check',
     'controllers.data_buffer',
