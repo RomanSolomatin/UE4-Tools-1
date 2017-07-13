@@ -17,6 +17,9 @@ class UCXPanel(bpy.types.Panel):
         layout.operator("uv.lightmap_generate", text=text)
         text = "Miror Group"
         layout.operator("object.group_miror", text=text)
+        icon = 'CURVE_DATA'
+        text = "Curve Data"
+        layout.operator("object.spline_csv", text=text)
 
 def register():
     bpy.utils.register_class(UCXPanel)

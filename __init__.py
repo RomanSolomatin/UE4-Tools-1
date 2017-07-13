@@ -21,6 +21,7 @@ modulesNames = [
     'controllers.group_mir',
     'controllers.lightmap',
     'controllers.manage',
+    'controllers.splinedata',
     ]
 
 modulesFullNames = []
