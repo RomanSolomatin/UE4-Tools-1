@@ -10,6 +10,7 @@ modulesNames = [
     # Models
     # 'models.paths',
     # Views
+    'views.pie',
     'views.check',
     'views.exports',
     'views.various',
