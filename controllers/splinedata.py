@@ -1,21 +1,19 @@
 import bpy
 import csv
 
-def dataspline(obj_select):
+def dataspline(object_name, curve_name):
     data = [
         ['', 'XPos', 'YPos', 'ZPos', 'XInTangent', 'YInTangent', 'ZInTangent',
          'XOutTangent', 'YOutTangent', 'ZOutTangent'],
     ]
 
-    name = obj_select.name
-    outputfile = 'E:\\Users\\Desktop\\Splines\\' + name + '.csv'
+    outputfile = 'E:\\Users\\Desktop\\Splines\\' + object_name + '.csv'
     csvfile = csv.writer(open(outputfile, 'w'),
                          delimiter=',')
 
     # All point spline
-    spline = obj_select.data.splines.active.bezier_points
+    spline = bpy.data.curves[curve_name].splines[0].bezier_points
     scale = 100
-
 
     for key in range(len(spline)):
         x_value = round(spline[key].co[0], 2)
@@ -30,6 +28,7 @@ def dataspline(obj_select):
         yt_out = round(spline[key].handle_right[1] * -1, 2)
         zt_out = round(spline[key].handle_right[2], 2)
 
+        print('vert' + str(key))
         data.append(['vert' + str(key),
                      x_value * scale, y_value * scale, z_value * scale,
                      xt_in * scale, yt_in * scale, zt_in * scale,
@@ -51,9 +50,9 @@ class SplineCSV(bpy.types.Operator):
                context.active_object.type == 'CURVE'
 
     def execute(self, context):
-        ob = context.object
-
-        dataspline(ob)
+        obj_name = context.object.name
+        curve_name = context.object.data.name
+        dataspline(obj_name, curve_name)
 
         return {'FINISHED'}
 
