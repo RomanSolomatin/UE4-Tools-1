@@ -7,7 +7,8 @@ def dataspline(obj_select):
          'XOutTangent', 'YOutTangent', 'ZOutTangent'],
     ]
 
-    outputfile = r'E:\Users\Desktop\Splines\blender_spline.csv'
+    name = obj_select.name
+    outputfile = 'E:\\Users\\Desktop\\Splines\\' + name + '.csv'
     csvfile = csv.writer(open(outputfile, 'w'),
                          delimiter=',')
 
@@ -17,28 +18,22 @@ def dataspline(obj_select):
 
 
     for key in range(len(spline)):
-        print('index', key) # Point Coordinate
-        print('Name > ', 'vert' + str(key),
-              'XPos > ', round(spline[key].co[0], 4),
-              'YPos > ', round(spline[key].co[1], 4),
-              'ZPos > ', round(spline[key].co[2], 4),
-              'XInTangent > ', round(spline[key].handle_left[0], 4),
-              'YInTangent > ', round(spline[key].handle_left[1], 4),
-              'ZInTangent > ', round(spline[key].handle_left[2], 4),
-              'XOutTangent > ', round(spline[key].handle_right[0], 4),
-              'YOutTangent > ', round(spline[key].handle_left[1], 4),
-              'ZOutTangent > ', round(spline[key].handle_left[2], 4))
+        x_value = round(spline[key].co[0], 2)
+        y_value = round(spline[key].co[1], 2) * -1
+        z_value = round(spline[key].co[2], 2)
+
+        xt_in = round(spline[key].handle_left[0], 2)
+        yt_in = round(spline[key].handle_left[1] * -1, 2)
+        zt_in = round(spline[key].handle_left[2], 2)
+
+        xt_out = round(spline[key].handle_right[0], 2)
+        yt_out = round(spline[key].handle_right[1] * -1, 2)
+        zt_out = round(spline[key].handle_right[2], 2)
 
         data.append(['vert' + str(key),
-                     round(spline[key].co[0], 4) * scale,
-                     round(spline[key].co[1], 4) * scale,
-                     round(spline[key].co[2], 4) * scale,
-                     round(spline[key].handle_left[0], 4) * scale,
-                     round(spline[key].handle_left[1], 4) * scale * -1,
-                     round(spline[key].handle_left[2], 4) * scale,
-                     round(spline[key].handle_right[0], 4) * scale,
-                     round(spline[key].handle_right[1], 4) * scale * -1,
-                     round(spline[key].handle_right[2], 4) * scale
+                     x_value * scale, y_value * scale, z_value * scale,
+                     xt_in * scale, yt_in * scale, zt_in * scale,
+                     xt_out * scale, yt_out * scale, zt_out * scale
                     ])
 
     for value in data:
