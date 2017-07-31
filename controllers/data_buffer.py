@@ -69,6 +69,8 @@ class DataBuffer(bpy.types.Operator):
                           + string_data_suffixe
         clipboard.copy(string_complete)
 
+
+        self.report({'INFO'}, "Data copied on your Buffer.")
         return {'FINISHED'}
 
 
