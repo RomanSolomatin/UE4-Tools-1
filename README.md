@@ -6,7 +6,7 @@ Add a dependecy, clipboard from python
 
 # UI
 
-[Panel](https://github.com/stilobique/UE4-Tools/wiki/Ressources/Pannel.jpg)
+![Panel](https://github.com/stilobique/UE4-Tools/wiki/Ressources/Pannel.jpg)
 
 # More
 Documentation avaible on Wiki page, WIP.
