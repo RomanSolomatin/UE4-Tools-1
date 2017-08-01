@@ -23,6 +23,9 @@ class ClassPanel(bpy.types.Panel):
         text = "Assets Elements"
         icon = "MATCUBE"
         layout.operator("object.manage_assets", text=text, icon=icon)
+        icon = 'CURVE_DATA'
+        text = "Export Curve Data"
+        layout.operator("object.spline_csv", text=text, icon=icon)
 
 
 def register():
