@@ -1,5 +1,6 @@
 import bpy
-import clipboard
+import pyperclip
+
 from math import degrees
 
 
@@ -16,7 +17,6 @@ class DataBuffer(bpy.types.Operator):
         string_data = ""
 
         for element in objs:
-            print(element.name)
             if element is not None:
                 position_x = str(round(element.location.x * 100, 2))
                 position_y = str(round(element.location.y * -100, 2))
@@ -67,7 +67,11 @@ class DataBuffer(bpy.types.Operator):
 
         string_complete = string_data_prefixe + string_data \
                           + string_data_suffixe
-        clipboard.copy(string_complete)
+
+        # copyBuffer(objs[0].name)
+        pyperclip.copy(string_complete)
+
+        print(string_complete)
 
 
         self.report({'INFO'}, "Data copied on your Buffer.")
