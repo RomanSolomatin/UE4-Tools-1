@@ -16,11 +16,11 @@ class PathExport(bpy.types.PropertyGroup):
             )
 
 
-def register():
+# def register():
     # bpy.utils.register_class(PathExport)
     # bpy.types.Scene.ue4_export = bpy.props.StringProperty(type='PathExport')
 
 
-def unregister():
+# def unregister():
     # bpy.utils.unregister_class(PathExport)
     # del bpy.types.Scene.ue4_export
